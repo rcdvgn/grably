@@ -1,0 +1,806 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+:root {
+  --color-almost-black: #11111c;
+  --color-black: #060609;
+  --color-gray: #3d3f5c;
+  --color-light-gray: #bebebe;
+  --color-primary: #5f15d6;
+  --color-dark-gray: #181a29;
+  --color-star-yellow: #ffe500;
+}
+
+#main {
+  min-height: 100vh;
+  background: var(--color-black);
+
+  position: relative;
+  display: flex;
+}
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  user-select: none;
+}
+
+#mediaContainer {
+  flex-grow: 1;
+  padding: 15px;
+  /* border: red solid; */
+  /* border: solid red thin; */
+}
+
+#mediaGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  row-gap: 30px;
+  column-gap: 20px;
+
+  /* border: solid red thin; */
+}
+
+.mediaItem {
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  pointer-events: none;
+
+  /* transition: all 0.1s ease; */
+  /* transition-delay: 0.1s; */
+}
+
+.itemPoster {
+  width: 100%;
+  border-radius: 6px;
+
+  display: block;
+  transform: scale(0.9);
+  transition: transform 0.2s ease;
+
+  pointer-events: auto;
+}
+
+.mediaItem:hover {
+  outline: solid var(--color-primary) 1px;
+  outline-offset: 3px;
+}
+
+.itemPoster:hover {
+  transform: scale(1);
+}
+
+.itemData {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  margin: auto;
+  pointer-events: none;
+  /* background-color: red; */
+}
+
+.title {
+  /* text-wrap: wrap; */
+  padding-top: 5px;
+  color: white;
+}
+
+#header {
+  /* border: solid red thin; */
+  padding: 20px 0;
+
+  display: flex;
+  gap: 15px;
+  justify-content: space-between;
+}
+
+#seachContainer {
+  /* transition: all 0.3s ease; */
+
+  width: 500px;
+  max-width: 500px;
+  outline: solid thin var(--color-dark-gray);
+
+  background-color: var(--color-almost-black);
+  border-radius: 10px;
+}
+
+#seachBarContainer {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  height: 55px;
+}
+
+#searchIconContainer {
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  /* border: solid red thin; */
+  display: grid;
+  place-items: center;
+}
+.inputSearchIcon {
+  fill: var(--color-gray);
+  width: 18px;
+}
+
+#seachInputContainer {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+#seachBarInput {
+  padding: 0 15px 0 0;
+
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  user-select: none;
+  background: none;
+  border: none;
+  outline: none;
+  color: white;
+}
+
+#searchPlaceholder,
+#seachBarInput {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#searchPlaceholder {
+  color: rgba(255, 255, 255, 0.452);
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  height: 0;
+  bottom: 0;
+  margin: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#searchResultsContainer {
+  /* border-color: red; */
+  /* height: 300px; */
+  /* border: solid red thin; */
+  padding: 3px;
+  overflow-y: auto;
+  max-height: 50vh;
+}
+
+#searchResultsContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.resultContainer {
+  /* border: solid red thin; */
+  display: flex;
+  gap: 15px;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  /* justify-content: flex-start; */
+}
+
+.resultContainer:hover {
+  background-color: var(--color-dark-gray);
+}
+
+.resultPosterContainer {
+  /* border: solid red thin; */
+}
+
+.resultPosterImg {
+  display: block;
+  height: 85px;
+  border-radius: 3px;
+}
+
+.resultPrimaryInfo {
+  /* border: solid red thin; */
+  flex: 1;
+  /* overflow: hidden; */
+  min-width: 0;
+  /* display: flex;
+  flex-direction: column;
+  gap: 5px; */
+}
+
+.resultTitleContainer {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 5px;
+}
+
+.resultTitle {
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.resultRatingContainer {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: auto;
+  margin-right: 5px;
+}
+
+.resultRatingIcon {
+  fill: var(--color-star-yellow);
+  width: 16px;
+}
+
+.resultRating {
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.resultSecondaryInfo {
+  color: var(--color-light-gray);
+  font-weight: 600;
+  font-size: 16px;
+
+  margin-bottom: 10px;
+}
+
+.resultOverview {
+  color: white;
+  font-weight: 400;
+  font-size: 16px;
+  /* margin-top: auto; */
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#filtersContainer {
+  /* width: 400px; */
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  /* border: solid red thin; */
+}
+
+#mediaTypeFilterWrapper {
+  display: flex;
+  border-radius: 100px;
+  width: fit-content;
+}
+
+.mediaTypeFilterOption {
+  border-radius: 100px;
+  padding: 10px 15px;
+  color: rgba(255, 255, 255, 0.5);
+
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.mediaTypeFilterOptionSelected {
+  background: white;
+  color: black !important;
+  font-weight: 600 !important;
+}
+
+#aboutContainer {
+  /* border: red solid; */
+  /* min-width: 400px !important; */
+  min-width: 500px;
+  height: 100vh;
+  padding: 15px 15px 15px 0;
+  display: grid;
+  place-items: center;
+  position: sticky;
+  right: 0;
+  top: 0;
+  width: 30vw;
+  transition: width 0.3s ease;
+}
+
+#aboutWrapper {
+  /* background-color: var(--color-almost-black); */
+  border-radius: 15px;
+
+  height: 100%;
+  width: 100%;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+}
+
+#aboutWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+#backdropContainer {
+  position: relative;
+}
+
+.backdropImg {
+  width: 100%;
+  display: block;
+}
+
+#primaryInfo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* border: red solid 2px; */
+  top: 0;
+  left: 0;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background: rgb(17, 17, 28);
+  /* background: linear-gradient(
+    180deg,
+    rgba(17, 17, 28, 0.6) 60%,
+    rgba(17, 17, 28, 1) 100%
+  ); */
+
+  padding-bottom: 2vw;
+}
+
+#mediaTypeContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border: solid red; */
+  /* height: 20px; */
+  margin: 10px;
+}
+
+#basicInfoContainer {
+  /* border: solid red; */
+  /* height: 20px; */
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.selectedMovieCloseIcon {
+  fill: white;
+  opacity: 0.6;
+  height: 12px;
+  cursor: pointer;
+}
+
+.selectedMovieCloseIcon:hover {
+  opacity: 1;
+}
+
+#mediatype {
+  font-weight: 700;
+  font-size: 12px;
+  color: white;
+}
+
+#basicInfoContainer {
+  padding: 0 4%;
+}
+
+#selectedMediaDuration {
+  color: rgba(255, 255, 255, 0.723);
+  font-size: 16px;
+  font-weight: 500;
+  /* padding: 0.8% 0; */
+}
+#selectedMediaTitle {
+  /* border: red solid; */
+  color: white;
+  font-weight: 700;
+  /* font-size: calc(24 * 0.06vw); */
+  font-size: calc(24px + 0.5vw);
+  /* padding: 0.6% 0; */
+}
+#selectedMediaApproval {
+  font-size: 14px;
+  /* padding: 0.6% 0; */
+}
+
+#selectedMediaApprovalText {
+  font-weight: 500;
+  color: white;
+}
+
+#selectedMediaApprovalPercentage {
+  font-weight: 800;
+}
+
+#detailsBodyContainer {
+  flex: 1;
+}
+
+#detailsBodyContainer > div:not(:first-child) {
+  padding: 20px 4%;
+}
+
+/* For the first div, keep the side padding but modify top/bottom */
+#detailsBodyContainer > div:first-child {
+  padding: 0 4% 20px; /* Only side padding */
+}
+
+#secondaryInfoContainer {
+  /* border: red solid; */
+  /* padding: 20px 4%; */
+
+  display: flex;
+  /* justify-content: stretch; */
+  /* align-items: flex-start; */
+
+  gap: 20px;
+}
+#secondaryInfoPosterContainer {
+  width: 25%;
+}
+
+.secondaryInfoPoster {
+  display: block;
+  width: 100%;
+
+  border-radius: 5px;
+}
+#secondaryInfo {
+  flex: 1;
+
+  overflow-x: hidden;
+}
+
+#metaContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  /* border: blue solid; */
+}
+
+.metaRow {
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.metaRowTitle {
+  color: white;
+}
+
+.metaRowContentItem {
+  color: var(--color-light-gray);
+  cursor: pointer;
+}
+
+.metaRowContentItem:hover {
+  text-decoration: underline;
+}
+
+#detailsOverviewContainer {
+  /* border: solid red thin; */
+}
+
+#detailsOverview {
+  color: white;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 125%;
+}
+
+#seasonsDetailsContainer {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  /* border: solid red; */
+  overflow-x: auto;
+}
+
+#seasonsDetailsContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.selectedMediaSeasonContainer {
+  display: flex;
+  /* border: solid blue; */
+  height: 120px;
+
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.selectedMediaSeasonContainer:hover {
+  outline: solid var(--color-gray) 2px;
+}
+
+.selectedMediaSeasonPosterContainer {
+  height: 100%;
+}
+
+.selectedMediaSeasonPosterImg {
+  display: block;
+  height: 100%;
+  border-radius: 12px 0 0 12px;
+}
+
+.selectedMediaSeasonDataContainer {
+  background-color: var(--color-dark-gray);
+  border-radius: 0 12px 12px 0;
+  padding: 10px 20px 10px 10px;
+  height: 100%;
+  width: 280px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.selectedMediaSeasonDataPrimaryInfo {
+  display: flex;
+  align-items: center;
+}
+
+.selectedMediaSeasonDataPrimaryNameDate {
+  /* display: flex; */
+  font-size: 16px;
+}
+
+.selectedMediaSeasonDataPrimaryInfoName {
+  font-weight: 600;
+  color: white;
+}
+
+.selectedMediaSeasonDataPrimaryInfoDate {
+  color: var(--color-light-gray);
+  font-weight: 500;
+  text-wrap: nowrap;
+}
+
+.selectedMediaSeasonDataPrimaryInfoRating {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.selectedMediaSeasonDataPrimaryInfoRatingIcon {
+  fill: var(--color-star-yellow);
+}
+
+.selectedMediaSeasonDataPrimaryInfoRatingText {
+  color: var(--color-light-gray);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.selectedMediaSeasonDataEpisodeNumber {
+  color: var(--color-light-gray);
+  font-weight: 500;
+  font-size: 16px;
+  padding: 5px 0;
+}
+
+.selectedMediaSeasonDataOverview {
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+
+  /* border: solid red thin; */
+
+  margin-top: auto;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+#searchOverlayVisble {
+  background-color: var(--color-black);
+  background: rgba(6, 6, 9, 0.75);
+  backdrop-filter: blur(10px);
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  left: 0;
+  top: 0;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 30vh;
+
+  z-index: 1000;
+}
+
+#searchOverlayInvisble {
+  /* width: fit-content; */
+  /* transition: all 0.3s ease; */
+  /* flex: 1; */
+  width: fit-content;
+}
+
+#detailsEpisodesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.detailsEpisodeContainer {
+  padding: 10px;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  cursor: pointer;
+}
+
+.detailsEpisodeContainer:hover {
+  background: rgba(255, 255, 255, 0.093);
+  border-radius: 8px;
+}
+
+.detailsEpisodeImgContainer {
+  height: 72px;
+  flex-shrink: 0;
+}
+
+.detailsEpisodeImg {
+  display: block;
+  border-radius: 4px;
+  height: 100%;
+}
+
+.detailsEpisodeInfoContainer {
+  /* border: solid red thin; */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.detailsEpisodeInfoTop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.detailsEpisodeTitle {
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.detailsEpisodeRuntime {
+  color: white;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.detailsEpisodeInfoOverview {
+  color: var(--color-light-gray);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+#seasonsAndEpisodesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#seasonSelectorContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: -20px; /* remove later; */
+}
+
+#seasonsAndEpisodes {
+  font-size: 18px;
+}
+
+#seasonsAndEpisodesTitle {
+  color: white;
+  font-weight: 600;
+}
+
+#seasonsAndEpisodesMore {
+  color: var(--color-light-gray);
+  font-weight: 500;
+}
+
+#seasonSelector {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid var(--color-light-gray);
+  border-radius: 5px;
+  background-color: transparent;
+  color: white;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+select option {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+#seasonSelector:hover,
+#seasonSelector:focus {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 1090px) {
+  #header {
+    flex-direction: column-reverse;
+  }
+
+  #aboutContainer {
+    position: fixed;
+    /* left: 0;
+    right: 0; */
+    /* border: solid blue thin; */
+    padding: 15px;
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+    background: rgba(6, 6, 9, 0.75);
+    backdrop-filter: blur(10px);
+  }
+
+  #aboutWrapper {
+    height: 95vh;
+    width: 690px;
+  }
+}
+
+@media (max-width: 768px) {
+  #aboutContainer {
+    padding: 0;
+  }
+
+  #aboutWrapper {
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  #searchOverlayVisble {
+    padding-top: 0;
+    background-color: var(--color-almost-black);
+  }
+
+  #seachContainer {
+    max-width: 100%;
+    background: none;
+    outline: none;
+    /* border-radius: 0 0 12px; */
+  }
+}
