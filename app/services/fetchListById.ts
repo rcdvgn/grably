@@ -3,8 +3,8 @@ import { db } from "@/app/_config/firebase";
 
 export default async function fetchListById(listId: any) {
   try {
-    const docRef = doc(db, "lists", listId); // Reference to the document
-    const docSnap = await getDoc(docRef); // Fetch the document
+    const docRef = doc(db, "lists", listId);
+    const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
       return { id: listId, ...docSnap.data() };

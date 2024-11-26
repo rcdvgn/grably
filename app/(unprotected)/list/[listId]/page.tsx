@@ -2,14 +2,20 @@
 
 import React, { useState, useEffect } from "react";
 import fetchListById from "@/app/services/fetchListById";
+import { useParams } from "next/navigation";
 import { useActions } from "@/app/_contexts/ActionsContext";
 import Filters from "@/app/_components/Filters";
 import Details from "@/app/_components/Details";
-
+import { AddIcon } from "@/app/assets/icons";
 import getMedia from "@/app/services/getMedia";
+import { useAuth } from "@/app/_contexts/AuthContext";
+import removeItemFromList from "@/app/services/removeItemFromList";
 
-export default function List({ params }: { params: { listId: string } }) {
-  const { listId } = params;
+export default function List() {
+  const { user } = useAuth();
+  const params = useParams();
+  const listId = params.listId as string;
+
   const {
     selectedMediaMeta,
     setSelectedMediaMeta,
@@ -45,10 +51,17 @@ export default function List({ params }: { params: { listId: string } }) {
           }))
         )
       );
+      console.log(listItems);
       setListItems(results);
     } catch (err) {
       console.error("Error fetching media details:", err);
     }
+  };
+
+  const handleRemoveItem = async (itemId: any) => {
+    if (!user) return;
+    if (user.id !== list.author) return;
+    await removeItemFromList(list.id, itemId);
   };
 
   useEffect(() => {
@@ -76,31 +89,45 @@ export default function List({ params }: { params: { listId: string } }) {
     }
   }, [list]);
 
+  if (!list) return null;
+
+  if (list.isPrivate && user?.id !== list.author)
+    return (
+      <div
+        style={{
+          height: "100vh",
+          width: "100vw",
+          display: "grid",
+          placeItems: "center",
+        }}
+      >
+        <p style={{ color: "white", fontSize: "30px", fontWeight: "700" }}>
+          This list is private, change visibility to access it.
+        </p>
+      </div>
+    );
+
   return (
     <>
       <div id="mediaContainer">
+        <div id="listTitle">{list.title}</div>
+
         <div id="header">
           <Filters
             selectedMediaType={selectedMediaType}
             setSelectedMediaType={setSelectedMediaType}
           />
-
-          {/* <SearchOverlay
-            results={results}
-            setResults={setResults}
-            handleMediaSelect={handleMediaSelect}
-          /> */}
         </div>
 
         <div id="mediaGrid">
           {listItems.length ? (
             listItems.map((item: any, index: number) =>
-              item.media_type === selectedMediaType ||
+              item.mediaType === selectedMediaType ||
               selectedMediaType === null ? (
                 <div
                   key={index}
                   className="mediaItem"
-                  onClick={() => handleMediaSelect(item.id, item.media_type)}
+                  onClick={() => handleMediaSelect(item.id, item.mediaType)}
                 >
                   <img
                     className="itemPoster"
@@ -111,13 +138,21 @@ export default function List({ params }: { params: { listId: string } }) {
                     alt=""
                   />
                   <div className="itemData"></div>
+                  <div
+                    onClick={() => handleRemoveItem(item.id)}
+                    className="mediaItemMoreIconWrapper"
+                  >
+                    <AddIcon className="mediaItemMoreIcon" />
+                  </div>
                 </div>
               ) : (
                 ""
               )
             )
           ) : (
-            <p>Nothing to see here</p>
+            <p style={{ color: "white", fontSize: "16px", fontWeight: "600" }}>
+              This list is empty.
+            </p>
           )}
         </div>
       </div>

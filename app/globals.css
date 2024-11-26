@@ -53,10 +53,27 @@ html {
   position: relative;
   overflow: hidden;
   border-radius: 6px;
-  pointer-events: none;
+  /* pointer-events: none; */
 
   /* transition: all 0.1s ease; */
   /* transition-delay: 0.1s; */
+}
+
+.mediaItemMoreIconWrapper {
+  height: 15px;
+  /* padding: 5px; */
+  position: absolute;
+
+  right: 10px;
+  top: 10px;
+  margin: auto;
+  transition-delay: all 0.2s;
+  visibility: hidden;
+}
+
+.mediaItemMoreIcon {
+  fill: white;
+  transform: rotate(45deg);
 }
 
 .itemPoster {
@@ -73,6 +90,10 @@ html {
 .mediaItem:hover {
   outline: solid var(--color-primary) 1px;
   outline-offset: 3px;
+}
+
+.mediaItem:hover .mediaItemMoreIconWrapper {
+  visibility: visible;
 }
 
 .itemPoster:hover {
@@ -420,7 +441,27 @@ html {
   /* font-size: calc(24 * 0.06vw); */
   font-size: calc(24px + 0.5vw);
   /* padding: 0.6% 0; */
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
+
+.selectedMediaTitleAddIconContainer {
+  padding: 4px;
+  border-radius: 50px;
+  border: solid white 2px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+
+  scale: 0.9;
+}
+
+.selectedMediaTitleAddIcon {
+  fill: white;
+}
+
 #selectedMediaApproval {
   font-size: 14px;
   /* padding: 0.6% 0; */
@@ -755,6 +796,220 @@ select option {
 #seasonSelector:hover,
 #seasonSelector:focus {
   background: rgba(0, 0, 0, 0.3);
+}
+
+.modalContainer {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  left: 0;
+  top: 0;
+  margin: auto;
+
+  display: grid;
+  place-items: center;
+}
+
+#addToListModalWrapper {
+  background-color: var(--color-almost-black);
+  padding: 1.5rem;
+
+  width: 450px;
+  border-radius: 10px;
+}
+
+#addToListModal {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 400px;
+}
+
+#addToListModalTitleWrapper {
+  display: flex;
+
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+#addToListModalTitle {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.addToListModalCloseIconWrapper {
+  margin-left: auto;
+}
+
+.addToListModalCloseIcon {
+  fill: white;
+
+  scale: 0.8;
+
+  cursor: pointer;
+}
+
+#addToListModalListsContainer {
+  /* margin-top: 10px; */
+}
+
+.addToListModalList {
+  padding: 10px 0;
+  border-radius: 7px;
+
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.addToListModalListCheckbox {
+  border-radius: 4px;
+  display: grid;
+  place-items: center;
+  height: 22px;
+  width: 22px;
+  cursor: pointer;
+}
+
+.addToListModalListCheckboxUnchecked {
+  border: solid white 1px;
+}
+
+.addToListModalListCheckboxChecked {
+  border: none;
+  background-color: var(--color-primary);
+}
+
+.addToListModalListCheckboxCheckmarkIcon {
+  fill: white;
+  scale: 0.6;
+}
+
+.addToListModalListTitleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* flex: 1; */
+  flex-shrink: 0;
+}
+
+.addToListModalListTitle {
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.addToListModalListTitleLockIcon {
+  fill: var(--color-light-gray);
+}
+
+#addToListModalNewListButtonWrapper {
+  margin-top: auto;
+}
+
+.addToListModalActionButton {
+  background-color: var(--color-primary);
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 100px;
+  outline: none;
+  border: none;
+  padding: 10px 20px;
+  width: 100%;
+}
+
+#addToListModalNewListButton:hover {
+  opacity: 0.85;
+}
+
+.addToListModalTitleBackIconWrapper {
+  cursor: pointer;
+  /* padding: 4px; */
+  transform: translateY(1px);
+}
+
+.addToListModalTitleBackIcon {
+  fill: white;
+  scale: 0.92;
+}
+
+#addToListModalNewListTitleContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.addToListModalNewListInput {
+  height: 45px;
+  border-radius: 8px;
+  outline: none;
+  border: solid 1px var(--color-gray);
+  background-color: transparent;
+  padding: 0 15px;
+  width: 100%;
+
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+}
+
+#addToListModalNewListInput:focus {
+  outline: solid 2px var(--color-primary);
+}
+
+#addToListModalNewListVisibilityContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+
+#addToListModalNewListVisibilityText {
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+}
+
+.addToListModalNewListVisibilitySwitchOuter {
+  background-color: var(--color-dark-gray);
+  width: 52px;
+  height: 30px;
+  /* padding: 2px; */
+  position: relative;
+  border-radius: 100px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.addToListModalNewListVisibilitySwitchOuterChecked {
+  background-color: var(--color-primary) !important;
+}
+
+#addToListModalNewListVisibilitySwitchInner {
+  border-radius: 100px;
+  height: 26px;
+  width: 26px;
+  background-color: white;
+  position: absolute;
+  top: 2px;
+  margin: auto;
+}
+
+#addToListModalNewListTitleError {
+  color: rgba(255, 0, 0, 0.721);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+#listTitle {
+  font-size: 30px;
+  color: white;
+  font-weight: 700;
 }
 
 @media (max-width: 1090px) {

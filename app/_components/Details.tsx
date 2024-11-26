@@ -4,10 +4,13 @@ import { createGradient } from "../utils/createGradient";
 import { formatRuntime } from "../utils/formatRuntime";
 
 import getMedia from "../services/getMedia";
-import { CloseIcon } from "../assets/icons";
+import { AddIcon, CloseIcon } from "../assets/icons";
 import SeasonsDetails from "./SeasonsDetails";
 import MetaContainer from "./MetaContainer";
 import EpisodesDetails from "./EpisodesDetails";
+
+import { useModal } from "../_contexts/ModalContext";
+// import AddToListModal from "./AddToListModal";
 
 export default function Details({
   selectedMediaMeta,
@@ -16,9 +19,10 @@ export default function Details({
   selectedMediaMeta: any;
   setSelectedMediaMeta: any;
 }) {
-  // const { selectedMediaMeta } = useActions();
+  const { setCurrentModal, setModalParams } = useModal();
+
   const [mediaDetails, setMediaDetails] = useState<any>(null);
-  const [backdropUrl, setBackdropUrl] = useState<string>(""); // Store backdrop URL
+  const [backdropUrl, setBackdropUrl] = useState<string>("");
   const aboutRef = useRef<HTMLDivElement | null>(null);
   const [selectedSeason, setSelectedSeason] = useState<any>(null);
 
@@ -128,6 +132,19 @@ export default function Details({
                     {selectedMediaMeta?.selectedMediaType === "movie"
                       ? mediaDetails?.title
                       : mediaDetails?.name}
+
+                    <span
+                      onClick={() => {
+                        setCurrentModal("AddToListModal");
+                        setModalParams({
+                          mediaId: mediaDetails?.id,
+                          mediaType: selectedMediaMeta?.selectedMediaType,
+                        });
+                      }}
+                      className="selectedMediaTitleAddIconContainer"
+                    >
+                      <AddIcon className="selectedMediaTitleAddIcon" />
+                    </span>
                   </div>
 
                   <div id="selectedMediaDuration">

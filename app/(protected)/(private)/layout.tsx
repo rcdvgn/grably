@@ -3,7 +3,6 @@
 import React, { ReactNode, useEffect } from "react";
 import { useAuth } from "@/app/_contexts/AuthContext";
 import { useRouter, useParams } from "next/navigation";
-import { ActionsProvider } from "@/app/_contexts/ActionsContext";
 
 const AuthenticatedLayout: React.FC<{ children: ReactNode }> = ({
   children,
@@ -20,17 +19,7 @@ const AuthenticatedLayout: React.FC<{ children: ReactNode }> = ({
     }
   }, [user, router]);
 
-  return (
-    <>
-      {user ? (
-        <div id="main" className="flex">
-          <ActionsProvider> {children}</ActionsProvider>
-             
-        </div>
-      ) : null}
-    </>
-  );
+  return <>{user ? <> {children}</> : null}</>;
 };
 
 export default AuthenticatedLayout;
-

@@ -51,7 +51,7 @@ function App() {
       try {
         const movieSuggestions = await getMovieSuggestions();
         const tvSuggestions = await getTVSuggestions();
-        console.log([...tvSuggestions, ...movieSuggestions]);
+        // console.log([...tvSuggestions, ...movieSuggestions]);
         setSuggestions([...tvSuggestions, ...movieSuggestions]); // Define o estado com a propriedade `results`
       } catch (error) {
         console.error("Error loading suggestions:", error);
